@@ -8,13 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Use Node.js version 16
-      uses: actions/checkout@v2
-
+    - name: uses Node.js version 16
+    - uses: actions/checkout@v2
       with:
         node-version: 16
-
-    - uses: actions/checkout@v2
 
     - name: Install dependencies
       run: npm install
