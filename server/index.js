@@ -24,13 +24,19 @@ app.post('/addPlaylist', (req, res) => {
     connection.query(sql, values, (error, results) => {
         if (error) {
             console.error('Error adding playlist:', error);
-            res.status(500).send('Error adding playlist');
+
+            if (error.code === 'ER_TRUNCATED_WRONG_VALUE_FOR_FIELD') {
+                res.status(400).json({message: 'Invalid playlist name'});
+            } else {
+                res.status(500).send('Error adding playlist');
+            }
         } else {
             console.log('Playlist added:', {id, name, description});
             res.json({id, name, description});
         }
     });
 });
+
 
 app.listen(3001, () => {
     console.log('Server listening on port 3001');
