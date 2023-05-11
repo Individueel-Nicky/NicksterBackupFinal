@@ -4,6 +4,9 @@
     "spotify-web-api-js": "^1.5.2"
   },
   "devDependencies": {
-    "html-webpack-plugin": "^5.5.1"
+    "html-webpack-plugin": "^5.5.1",
+    "checkly": "latest",
+    "ts-node": "latest",
+    "typescript": "latest"
   }
 }
