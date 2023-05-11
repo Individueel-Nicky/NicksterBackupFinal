@@ -1,24 +1,35 @@
+name: Build and Deploy to Vercel
+env:
+
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
 on:
   push:
     branches:
       - main
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
 
-    steps:
-    - name: uses Node.js version 16
-    - uses: actions/checkout@v2
-      with:
-        node-version: 16
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build and deploy to Vercel
-    - uses: amondnet/vercel-action
-      with:
-        vercel-token: ${{ secrets.VERCEL_TOKEN }}
-        vercel-project-id: prj_P0HmaSihpa5n5Z03pLl6zQByb28G
-        build-command: npm run build
+  Deploy-Production:
+      
+          runs-on: ubuntu-latest
+      
+          steps:
+      
+            - uses: actions/checkout@v2
+      
+            - name: Install Vercel CLI
+      
+              run: npm install --global vercel@latest
+      
+            - name: Pull Vercel Environment Information
+      
+              run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      
+            - name: Build Project Artifacts
+      
+              run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      
+            - name: Deploy Project Artifacts to Vercel
+      
+              run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
