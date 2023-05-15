@@ -8,7 +8,7 @@ on:
 jobs:
   deploy-production:
     runs-on: ubuntu-latest
-      
+      runs.using: node12
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
         with:
-          node-version: 16
+          node-version: 18
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
