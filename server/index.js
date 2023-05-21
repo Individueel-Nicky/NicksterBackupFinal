@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const http = require('http');
 
 const { Sequelize, Model, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('spotifyplaylistdb', 'root', '123456789', {
@@ -12,7 +13,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-class Playlist extends Model {}
+class Playlist extends Model { }
 
 Playlist.init({
   id: {
@@ -33,9 +34,11 @@ Playlist.init({
   timestamps: false,
 });
 
+const server = http.createServer(app);
+
 app.post('/addPlaylist', async (req, res) => {
   console.log('Received data:', req.body);
-  const {id, name, description} = req.body;
+  const { id, name, description } = req.body;
 
   try {
     const playlist = await Playlist.create({ id, name, description });
@@ -44,17 +47,16 @@ app.post('/addPlaylist', async (req, res) => {
   } catch (error) {
     console.error('Error adding playlist:', error);
     if (error.name === 'SequelizeValidationError') {
-      res.status(400).json({message: 'Invalid playlist name'});
+      res.status(400).json({ message: 'Invalid playlist name' });
     } else {
       res.status(500).send('Error adding playlist');
     }
   }
 });
 
-module.exports = { app, closeServer: server.close, sequelize }; 
-const server = app.listen(3001, async () => {
-  console.log('Server listening on port 3001');
-
+const port = 3001;
+server.listen(port, async () => {
+  console.log(`Server is running on port ${port}`);
   try {
     await sequelize.authenticate();
     console.log('Database connection has been established successfully.');
@@ -63,4 +65,5 @@ const server = app.listen(3001, async () => {
   }
 });
 
+module.exports = { app, closeServer: server.close.bind(server), sequelize };
 

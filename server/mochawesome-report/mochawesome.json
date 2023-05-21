@@ -1,0 +1,100 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2023-05-17T10:09:19.462Z",
+    "end": "2023-05-17T10:09:19.550Z",
+    "duration": 88,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "6b161235-e202-4a4b-82d8-07c59fb54321",
+      "title": "",
+      "fullFile": "C:\\Users\\nickt\\WebstormProjects\\fireship\\NicksterBackupFinal\\server\\integration.test.js",
+      "file": "\\integration.test.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "40f40c6d-6b66-4594-8f34-cdfdf131b87c",
+          "title": "Playlist API",
+          "fullFile": "C:\\Users\\nickt\\WebstormProjects\\fireship\\NicksterBackupFinal\\server\\integration.test.js",
+          "file": "\\integration.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should add a new playlist",
+              "fullTitle": "Playlist API should add a new playlist",
+              "timedOut": false,
+              "duration": 80,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const requestBody = {\n    id: 2,\n    name: 'My Playlist tested in integration',\n    description: 'This is my favorite playlist'\n};\ntry {\n    const response = await axios.post('http://localhost:3001/addPlaylist', requestBody);\n    expect(response.status).to.equal(200);\n    expect(response.data).to.deep.equal(requestBody);\n} catch (error) {\n    console.error('Error adding playlist:', error);\n}",
+              "err": {},
+              "uuid": "526f7316-fe6d-48d9-8e83-79ac0149666e",
+              "parentUUID": "40f40c6d-6b66-4594-8f34-cdfdf131b87c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "526f7316-fe6d-48d9-8e83-79ac0149666e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 80,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "10.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}
